@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    default-active="1-4-1"
+    :default-active="currentMenu.name"
     class="el-menu-vertical-demo"
     @open="handleOpen"
     @close="handleClose"
@@ -12,7 +12,7 @@
     <h3 v-show="!isCollapse">后台管理系统</h3>
     <h3 v-show="isCollapse">后台</h3>
     <el-menu-item
-      :index="i.path"
+      :index="i.name"
       v-for="i in noChildren"
       :key="i.name"
       @click="changeCom(i)"
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "myAside",
   mounted() {
@@ -112,6 +113,7 @@ export default {
     noChildren() {
       return this.menu.filter((item) => !item.children);
     },
+    ...mapState("bread", ["currentMenu"]),
   },
 };
 </script>

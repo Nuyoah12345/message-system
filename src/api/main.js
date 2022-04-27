@@ -5,7 +5,14 @@ export const reqEchart = (token) => request({ url: '/my/getEcharts', headers: { 
 export const reqLogin = (data) => request({
     url: '/api/login',
     method: 'POST',
-    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    // headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    data
+})
+
+export const reqReguser = (data) => request({
+    url: '/api/reguser',
+    method: 'POST',
+    // headers: { 'content-type': 'application/x-www-form-urlencoded' },
     data
 })
 

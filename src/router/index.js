@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '@/pages/Login'
-import Main from '@/pages/Main'
-import Home from '@/pages/Home'
-import Mall from '@/pages/Mall'
-import User from '@/pages/User'
-import PageOne from '@/pages/Other/pageOne.vue'
-import PageTwo from '@/pages/Other/pageTwo.vue'
+// import Login from '@/pages/Login'
+// import Main from '@/pages/Main'
+// import Home from '@/pages/Home'
+// import Mall from '@/pages/Mall'
+// import User from '@/pages/User'
+// import PageOne from '@/pages/Other/pageOne.vue'
+// import PageTwo from '@/pages/Other/pageTwo.vue'
 
 Vue.use(VueRouter)
 
@@ -25,41 +25,41 @@ const router = new VueRouter({
         {
             name: 'Main',
             path: '/',
-            component: Main,
+            component: () => import(/* webpackChunkName: "Main" */ `@/pages/Main`),
             // 跳往二级页面
             redirect: '/login',
             children: [
                 {
                     name: 'mall',
                     path: 'mall',
-                    component: Mall,
+                    component: () => import(/* webpackChunkName: "Mall" */ `@/pages/Mall`),
                 },
                 {
                     name: 'home',
                     path: 'home',
-                    component: Home,
+                    component: () => import(/* webpackChunkName: "Home" */ `@/pages/Home`),
                 },
                 {
                     name: 'user',
                     path: 'user',
-                    component: User,
+                    component: () => import(/* webpackChunkName: "User" */ `@/pages/User`),
                 },
                 {
                     name: 'page1',
                     path: 'page1',
-                    component: PageOne,
+                    component: () => import(/* webpackChunkName: "page" */ `@/pages/Other/pageOne`),
                 },
                 {
                     name: 'page2',
                     path: 'page2',
-                    component: PageTwo,
+                    component: () => import(/* webpackChunkName: "page" */ `@/pages/Other/pageTwo`),
                 },
             ]
         },
         {
             name: 'login',
             path: '/login',
-            component: Login
+            component: () => import(/* webpackChunkName: "Login" */ `@/pages/Login`),
         }
         // 一级路由才生效
         /* {

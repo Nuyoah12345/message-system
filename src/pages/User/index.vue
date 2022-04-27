@@ -12,7 +12,7 @@
 
     <!-- 表单内容 -->
     <el-dialog
-      :title="isAdd ? '新增' : '编辑'"
+      :title="isAdd ? '新增用户' : '编辑'"
       :visible.sync="dialogVisible"
       width="30%"
       :before-close="handleClose"
@@ -93,7 +93,9 @@ export default {
         sex: "",
       },
       // 关键字接收
-      searchVal: {},
+      searchVal: { keyword: "" },
+      // 标志位  做节流操作
+      sign: true,
     };
   },
   methods: {
@@ -101,7 +103,12 @@ export default {
       this.dialogVisible = false;
     },
     getKeyList() {
-      this.$store.dispatch("user/getkeyuser", this.searchVal);
+      if (this.sign) {
+        this.sign = false;
+        setTimeout(() => {
+          this.$store.dispatch("user/getkeyuser", this.searchVal);
+        }, 500);
+      }
       // this.searchVal = "";
     },
   },
@@ -110,6 +117,11 @@ export default {
   },
   computed: {
     ...mapState("user", ["tableData"]),
+  },
+  watch: {
+    tableData() {
+      this.sign = true;
+    },
   },
 };
 </script>

@@ -1,7 +1,6 @@
 import { reqLogin } from "@/api/main"
 import { reqUserList } from "@/api/main"
 import { getkeyuser } from "@/api/main"
-import qs from 'qs'
 
 export default {
     namespaced: true,
@@ -25,7 +24,7 @@ export default {
         async login(context, val) {
             let data = { username: val.username, password: val.password }
             // 用于post 以application / x-www-form-urlencoded格式发送数据
-            data = qs.stringify(data)
+            // data = qs.stringify(data)
             // console.log(data);
             let res = await reqLogin(data)
             if (res.status == 1) return alert('用户名或密码错误')
@@ -53,6 +52,11 @@ export default {
                 context.commit('SETUSERLIST', res.data)
             }
 
+        },
+
+        quitLogin(context, val) {
+            sessionStorage.removeItem('token')
+            context.commit("QUITLOGIN")
         }
     }
 }
