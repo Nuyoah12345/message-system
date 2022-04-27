@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import qs from "qs";
 import { reqReguser } from "@/api/main.js";
 import myForm from "@/components/myForm";
 import { mapState } from "vuex";
